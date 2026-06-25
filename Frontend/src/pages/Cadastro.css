@@ -73,3 +73,20 @@ button:hover {
 button:active {
   transform: scale(0.98);
 }
+
+.link {
+  margin-top: 15px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.link a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link a:hover {
+  text-decoration: underline;
+}
