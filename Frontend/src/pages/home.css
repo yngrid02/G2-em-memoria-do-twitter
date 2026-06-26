@@ -1,71 +1,145 @@
-body{
-    background:#f4f6f8;
+body {
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.home{
-    max-width:700px;
-    margin:40px auto;
-    padding:20px;
+/* Novo container para envelopar a home e a barra lateral lado a lado */
+.home-layout {
+    display: flex;
+    max-width: 1000px; /* Aumentamos para caber os dois elementos lado a lado */
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 30px;
 }
 
-.home h1{
-    text-align:center;
-    color:#4f46e5;
-    margin-bottom:25px;
+/* O seu estilo original do Feed (ajustado o margin para alinhar com a lateral) */
+.home {
+    flex: 1; /* Ocupa o maior espaço possível */
+    max-width: 650px;
+    margin: 40px 0;
 }
 
-.novo-post{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
-    margin-bottom:25px;
+.home h1 {
+    text-align: left; /* Alinhado à esquerda igual ao X */
+    color: #4f46e5;
+    margin-bottom: 25px;
+    font-size: 28px;
 }
 
-textarea{
-    width:100%;
-    height:120px;
-    resize:none;
-    border:1px solid #ddd;
-    border-radius:8px;
-    padding:15px;
-    font-size:16px;
+.novo-post {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    margin-bottom: 25px;
 }
 
-.novo-post button{
-    margin-top:15px;
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:8px;
-    background:#4f46e5;
-    color:white;
-    cursor:pointer;
+textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
 }
 
-.post{
-    background:white;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
+textarea:focus {
+    border-color: #4f46e5;
 }
 
-.post h3{
-    color:#4f46e5;
-    margin-bottom:10px;
+.novo-post button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #4f46e5;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-.post p{
-    color:#444;
-    margin-bottom:15px;
+.novo-post button:hover {
+    background: #3730a3;
 }
 
-.post button{
-    background:#4f46e5;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
+.post {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.post h3 {
+    color: #4f46e5;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.post p {
+    color: #444;
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.post button {
+    background: #f4f6f8;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 20px; /* Botão mais arredondado estilo Twitter */
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.post button:hover {
+    background: #e2e8f0;
+}
+
+/* NOVA BARRA LATERAL (Resolve o problema da tela muito vazia nas pontas) */
+.sidebar-trends {
+    width: 300px;
+    background: white;
+    margin-top: 105px; /* Alinha com a caixa de texto */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    height: fit-content;
+}
+
+.sidebar-trends h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.trend-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f4f6f8;
+    padding-bottom: 10px;
+}
+
+.trend-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.trend-item span {
+    font-size: 12px;
+    color: #777;
+}
+
+.trend-item p {
+    font-weight: bold;
+    color: #333;
+    margin-top: 2px;
 }
