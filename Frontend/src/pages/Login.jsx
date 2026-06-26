@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Cadastro.css";
 
 function Login() {
 
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (dados) => {
 
@@ -17,6 +18,7 @@ function Login() {
       );
 
       alert(resposta.data.mensagem);
+      navigate("/home");
 
     } catch {
 

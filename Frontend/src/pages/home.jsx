@@ -1,57 +1,89 @@
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useState } from "react";
+import "./Home.css";
 
-function Login() {
-  const { register, handleSubmit } = useForm();
+function Home() {
+  const [texto, setTexto] = useState("");
 
-  const onSubmit = async (dados) => {
-    try {
-      const resposta = await axios.post(
-        "http://localhost:3000/login",
-        dados
-      );
-      
-      // Aqui, se der certo, o ideal depois será salvar que o usuário logou (ex: no localStorage) 
-      // e redirecionar ele para a Home!
-      alert(resposta.data.mensagem);
+  const [posts, setPosts] = useState([
+    {
+      id: 1,
+      autor: "Yngrid",
+      texto: "Meu primeiro post!",
+      curtido: false,
+    },
+    {
+      id: 2,
+      autor: "Pedro",
+      texto: "Olá, pessoal!",
+      curtido: false,
+    },
+  ]);
 
-    } catch {
-      alert("Login inválido. Verifique seu email e senha.");
-    }
-  };
+  function publicar() {
+    if (texto.trim() === "") return;
+
+    const novoPost = {
+      id: Date.now(),
+      autor: "Você",
+      texto: texto,
+      curtido: false,
+    };
+
+    setPosts([novoPost, ...posts]);
+    setTexto("");
+  }
+
+  function curtir(id) {
+    setPosts(
+      posts.map((post) =>
+        post.id === id
+          ? { ...post, curtido: !post.curtido }
+          : post
+      )
+    );
+  }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
-      <h2>Entrar no MicroTweet</h2>
-      
-      <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '15px', width: '300px' }}>
-        
-        <input
-          placeholder="Email"
-          type="email"
-          {...register("email")}
-          style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
-          required
-        />
-        
-        <input
-          type="password"
-          placeholder="Senha"
-          {...register("senha")}
-          style={{ padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
-          required
-        />
-        
-        <button type="submit" style={{ padding: '10px', backgroundColor: '#1DA1F2', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>
-          Entrar
-        </button>
-      </form>
+    <div className="home">
 
-      <p style={{ marginTop: '20px' }}>
-        Não tem conta? <a href="/cadastro" style={{ color: '#1DA1F2', textDecoration: 'none' }}>Cadastre-se</a>
-      </p>
+      <h1>Home</h1>
+
+      <div className="novo-post">
+
+        <textarea
+          placeholder="O que estou pensando?"
+          value={texto}
+          onChange={(e) => setTexto(e.target.value)}
+        />
+
+        <button onClick={publicar}>
+          Publicar
+        </button>
+
+      </div>
+
+      <div className="lista-posts">
+
+        {posts.map((post) => (
+
+          <div className="post" key={post.id}>
+
+            <h3>{post.autor}</h3>
+
+            <p>{post.texto}</p>
+
+            <button onClick={() => curtir(post.id)}>
+              {post.curtido ? "💙 Descurtir" : "🤍 Curtir"}
+            </button>
+
+          </div>
+
+        ))}
+
+      </div>
+
     </div>
   );
 }
 
-export default Login;
+export default Home;
