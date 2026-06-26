@@ -1,63 +1,60 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "./Cadastro.css";
 
-function Login(){
+function Login() {
 
-const {register,handleSubmit}=useForm();
+  const { register, handleSubmit } = useForm();
 
-const onSubmit=async(dados)=>{
+  const onSubmit = async (dados) => {
 
-try{
+    try {
 
-const resposta=await axios.post(
+      const resposta = await axios.post(
+        "http://localhost:3000/login",
+        dados
+      );
 
-"http://localhost:3000/login",
+      alert(resposta.data.mensagem);
 
-dados
+    } catch {
 
-);
+      alert("Login inválido");
 
-alert(resposta.data.mensagem);
+    }
 
-}catch{
+  };
 
-alert("Login inválido");
+  return (
 
-}
+    <form onSubmit={handleSubmit(onSubmit)}>
 
-};
+      <h1>Login</h1>
 
-return(
+      <input
+        placeholder="Email"
+        {...register("email")}
+      />
 
-<form onSubmit={handleSubmit(onSubmit)}>
+      <input
+        type="password"
+        placeholder="Senha"
+        {...register("senha")}
+      />
 
-<input
+      <button type="submit">
+        Entrar
+      </button>
 
-placeholder="Email"
+      <p className="link">
+        Não possui uma conta?{" "}
+        <Link to="/cadastro">Cadastre-se</Link>
+      </p>
 
-{...register("email")}
+    </form>
 
-/>
-
-<input
-
-type="password"
-
-placeholder="Senha"
-
-{...register("senha")}
-
-/>
-
-<button>
-
-Entrar
-
-</button>
-
-</form>
-
-);
+  );
 
 }
 
