@@ -1,0 +1,16 @@
+prompt para Backend feito por Taylanne
+
+-> Mensagem: Verifique se está tudo ok com o database.js
+
+    Aqui mandei todo o código do rotas.js e database.js para verificar se tinha algum erro que passou batido.
+
+    
+
+-> Mensagem: Faça testes para as seguintes rotas
+
+    Aqui pedi para fazer códigos testes para copiar e colar para agilizar os testes. 
+
+
+
+-> Mensagem: Faça um gitignore para não subir o node_modules e o banco.sqlite
+
