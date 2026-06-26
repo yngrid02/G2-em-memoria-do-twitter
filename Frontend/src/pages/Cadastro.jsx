@@ -1,17 +1,16 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./Cadastro.css";
 
 function Cadastro() {
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = async (dados) => {
+
     try {
+
       const resposta = await axios.post(
         "http://localhost:3000/cadastro",
         dados
@@ -20,12 +19,18 @@ function Cadastro() {
       alert(resposta.data.mensagem);
 
     } catch (erro) {
-      alert(erro.response?.data?.erro || "Erro no cadastro");
+
+      alert("Erro");
+
     }
+
   };
 
   return (
+
     <form onSubmit={handleSubmit(onSubmit)}>
+
+      <h1>Cadastro</h1>
 
       <input
         placeholder="Nome"
@@ -33,6 +38,7 @@ function Cadastro() {
           required: "Informe o nome"
         })}
       />
+
       <p>{errors.nome?.message}</p>
 
       <input
@@ -41,6 +47,7 @@ function Cadastro() {
           required: "Informe o email"
         })}
       />
+
       <p>{errors.email?.message}</p>
 
       <input
@@ -49,28 +56,38 @@ function Cadastro() {
         {...register("senha", {
           required: "Informe a senha",
           minLength: {
-            value: 6,
-            message: "Mínimo de 6 caracteres"
+            value: 8,
+            message: "A senha deve ter no mínimo 8 caracteres"
           }
         })}
       />
+
       <p>{errors.senha?.message}</p>
 
       <input
         type="password"
         placeholder="Confirmar senha"
         {...register("confirmacaoSenha", {
-          required: "Confirme a senha",
           validate: (v, dados) =>
             v === dados.senha || "As senhas não coincidem"
         })}
       />
+
       <p>{errors.confirmacaoSenha?.message}</p>
 
-      <button>Cadastrar</button>
+      <button type="submit">
+        Cadastrar
+      </button>
+
+      <p className="link">
+        Já possui uma conta?{" "}
+        <Link to="/">Entrar</Link>
+      </p>
 
     </form>
+
   );
+
 }
 
 export default Cadastro;
